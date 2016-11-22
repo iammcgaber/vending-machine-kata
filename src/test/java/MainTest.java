@@ -82,5 +82,28 @@ public class MainTest {
 	@Test public void purchase_menu_prints() {
 		Assert.assertEquals("Please enter product number:", vend.purchaseMenu);
 	}
+	
+	@Test 
+	public void check_inventory_size() {
+		Assert.assertEquals(3, vend.getInventorySize());
+	}
+	
+	@Test
+	public void check_typing_quarter_returns_25() {
+		Assert.assertEquals(25, vend.checkMoney("QuArTer"));
+		Assert.assertEquals(25, vend.checkMoney("25"));
+	}
+	
+	@Test
+	public void check_typing_nickel_returns_25() {
+		Assert.assertEquals(5, vend.checkMoney("nickel"));
+		Assert.assertEquals(5, vend.checkMoney("5"));
+	}
+	
+	@Test
+	public void check_typing_dime_returns_25() {
+		Assert.assertEquals(10, vend.checkMoney("dIMe"));
+		Assert.assertEquals(10, vend.checkMoney("10"));
+	}
 
 }

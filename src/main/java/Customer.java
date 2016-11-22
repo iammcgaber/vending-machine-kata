@@ -41,8 +41,10 @@ public class Customer {
 					System.out.println("Please select a valid number");
 					userInput.next();
 				}
-				if (vend.purchaseProduct(userChoice).getPrice() > vend.getBalance()) {
+				
+				if (vend.getProduct(userChoice).getPrice() > vend.getBalance()) {
 					System.out.println("Sorry, you do not have enough money.  Please enter more money.");
+					System.out.println();
 				}
 				else if(userChoice <= vend.getInventorySize()) {
 					Product purchasedProduct = vend.purchaseProduct(userChoice);
@@ -56,13 +58,14 @@ public class Customer {
 			else {
 				try {
 					vend.displayDepositMenu();
-					deposit = userInput.nextLine();
+					deposit = userInput.next();
 					System.out.println();
 				}
 				catch(InputMismatchException ex) {
 					System.out.println("Please insert a Quarter, Dime, or Nickel:");
 					userInput.next();
 				}
+				
 				int value = vend.checkMoney(deposit);
 				vend.putMoney(value);
 			} 

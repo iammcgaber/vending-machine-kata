@@ -9,7 +9,7 @@ public class VendingMachine {
 
 	public String[] mainMenu = new String[] {"1) View Products", "2) Purchase Item", "3) Insert Money"};
 	public String purchaseMenu = "Please enter product number:";
-	private String[] depositMenu = new String[]	{"Please deposit one of the following types of coins: ", "Quarter", "Nickel", "Dime"};
+	private String[] depositMenu = new String[]	{"Quarter", "Nickel", "Dime"};
 	public ArrayList<Product> products = new ArrayList<Product>();
 	public int balance = 0;
 	
@@ -22,7 +22,7 @@ public class VendingMachine {
 		System.out.println(mainMenu[1]);
 		System.out.println(mainMenu[2]);
 		System.out.println();
-		System.out.println("Current balance: " + getBalance());
+		System.out.println("Current balance: " + toString());
 	}
 	
 	public void listProducts() {
@@ -59,28 +59,34 @@ public class VendingMachine {
 		return balance;
 	}
 	
+	public Product getProduct(int productNumber) {
+		return products.get(productNumber - 1);
+	}
+	
 	public void displayPurchase(Product product) {
 		System.out.println("Thank you for purchasing " + product.getName() + ".");
-		System.out.println("Your balance is " + getBalance());
+		System.out.println("Your balance is " + toString());
 	}
 	
 	public void displayDepositMenu() {
+		System.out.println("Please deposit one of the following types of coins: ");
 		for(int i = 0; i < depositMenu.length; i++) {
 			System.out.println(depositMenu[i]);
 		}
 	}
 	
 	public int checkMoney(String input) {
-		if(input.equalsIgnoreCase("quarter") || Integer.valueOf(input) == 25) {
+		if(input.equalsIgnoreCase("quarter") || input.equals("25")) {
 			return 25;
 		}
-		else if (input.equalsIgnoreCase("dime") || Integer.valueOf(input) == 10) {
+		else if (input.equalsIgnoreCase("dime") || input.equals("10")) {
 			return 10;
 		}
-		else if (input.equalsIgnoreCase("nickel") || Integer.valueOf(input) == 5) {
+		else if (input.equalsIgnoreCase("nickel") || input.equals("5")) {
 			return 5;
 		}
 		else {
+			System.out.println("We don't accept those.");
 			return 0;
 		}
 	}

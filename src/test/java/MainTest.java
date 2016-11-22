@@ -53,5 +53,10 @@ public class MainTest {
 	public void vending_machine_menu_has_chip_price() {
 		Assert.assertEquals("$1.00", vend.products.get(0).toString());
 	}
+	
+	@Test
+	public void balance_before_inserting_money_is_0() {
+		Assert.assertEquals(0, vend.getBalance());
+	}
 
 }

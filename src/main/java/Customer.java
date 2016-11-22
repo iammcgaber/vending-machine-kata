@@ -9,6 +9,7 @@ public class Customer {
 		Scanner userInput = new Scanner(System.in);
 		VendingMachine vend = new VendingMachine();
 		int userChoice = 0;
+		String deposit = "";
 		
 		while(!exit) {
 			vend.showMainMenu();
@@ -40,8 +41,12 @@ public class Customer {
 					System.out.println("Please select a valid number");
 					userInput.next();
 				}
-				if(userChoice <= vend.getInventorySize()) {
-					vend.purchaseProduct(userChoice);
+				if (vend.purchaseProduct(userChoice).getPrice() > vend.getBalance()) {
+					System.out.println("Sorry, you do not have enough money.  Please enter more money.");
+				}
+				else if(userChoice <= vend.getInventorySize()) {
+					Product purchasedProduct = vend.purchaseProduct(userChoice);
+					vend.displayPurchase(purchasedProduct);
 				}
 				else {
 					System.out.println("Sorry, that is an invalid choice.");
@@ -49,8 +54,17 @@ public class Customer {
 				
 			} 
 			else {
-				
-				vend.putMoney(100);
+				try {
+					vend.displayDepositMenu();
+					deposit = userInput.nextLine();
+					System.out.println();
+				}
+				catch(InputMismatchException ex) {
+					System.out.println("Please insert a Quarter, Dime, or Nickel:");
+					userInput.next();
+				}
+				int value = vend.checkMoney(deposit);
+				vend.putMoney(value);
 			} 
 		}
 		System.exit(0);

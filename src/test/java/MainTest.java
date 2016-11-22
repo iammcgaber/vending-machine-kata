@@ -58,5 +58,11 @@ public class MainTest {
 	public void balance_before_inserting_money_is_0() {
 		Assert.assertEquals(0, vend.getBalance());
 	}
+	
+	@Test
+	public void able_to_deposit_money() {
+		vend.putMoney(25);
+		Assert.assertEquals(25, vend.getBalance());
+	}
 
 }

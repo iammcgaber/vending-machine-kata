@@ -21,6 +21,10 @@ public class VendingMachine {
 		products.add(new Product("Candy", 65));
 	}
 	
+	public void putMoney(int amount) {
+		balance += amount;
+	}
+	
 	public int getBalance() {
 		return balance;
 	}

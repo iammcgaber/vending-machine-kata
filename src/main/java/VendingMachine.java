@@ -8,6 +8,7 @@ import java.util.Map;
 public class VendingMachine {
 
 	public String[] mainMenu = new String[] {"1) View Products", "2) Purchase Item", "3) Insert Money"};
+	public String purchaseMenu = "Please enter product number:";
 	public ArrayList<Product> products = new ArrayList<Product>();
 	public int balance = 0;
 	
@@ -23,6 +24,11 @@ public class VendingMachine {
 	
 	public void putMoney(int amount) {
 		balance += amount;
+	}
+	
+	public Product purchaseProduct(int productNumber) {
+		balance -= products.get(productNumber - 1).getPrice();
+		return products.get(productNumber - 1);
 	}
 	
 	public int getBalance() {

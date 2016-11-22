@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,12 @@ public class MainTest {
 	
 	@Before
 	public void setup() {
+		customer = new Customer();
+		vend = new VendingMachine();
+	}
+	
+	@After
+	public void reset() {
 		customer = new Customer();
 		vend = new VendingMachine();
 	}
@@ -63,6 +70,15 @@ public class MainTest {
 	public void able_to_deposit_money() {
 		vend.putMoney(25);
 		Assert.assertEquals(25, vend.getBalance());
+		System.out.println(vend.getBalance());
 	}
+	
+	@Test
+	public void able_to_purchase_product() {
+		Assert.assertEquals("Cola", vend.purchaseProduct(1).getName());
+		Assert.assertEquals(-100, vend.getBalance());
+	}
+	
+	
 
 }

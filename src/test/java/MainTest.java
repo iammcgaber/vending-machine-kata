@@ -21,8 +21,8 @@ public class MainTest {
 	}
 	
 	@Test
-	public void product_class_is_not_void() {
-		Product chips = new Product("Chips", (double)1);
+	public void product_class_is_not_void_and_has_name() {
+		Product chips = new Product("Chips", 100);
 		
 		Assert.assertNotNull(chips);
 		Assert.assertEquals("Chips", chips.getName());
@@ -41,6 +41,17 @@ public class MainTest {
 	@Test
 	public void vending_machine_menu_has_insert_money() {
 		Assert.assertEquals("3) Insert Money", vend.mainMenu[2]);
+	}
+	
+	@Test
+	public void vending_machine_menu_cola() {
+		
+		Assert.assertEquals("Cola", vend.products.get(0).getName());
+	}
+	
+	@Test
+	public void vending_machine_menu_has_chip_price() {
+		Assert.assertEquals("$1.00", vend.products.get(0).toString());
 	}
 
 }

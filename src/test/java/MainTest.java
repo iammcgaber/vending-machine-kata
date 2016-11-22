@@ -79,6 +79,8 @@ public class MainTest {
 		Assert.assertEquals(-100, vend.getBalance());
 	}
 	
-	
+	@Test public void purchase_menu_prints() {
+		Assert.assertEquals("Please enter product number:", vend.purchaseMenu);
+	}
 
 }

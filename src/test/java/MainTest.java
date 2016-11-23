@@ -105,5 +105,10 @@ public class MainTest {
 		Assert.assertEquals(10, vend.checkMoney("dIMe"));
 		Assert.assertEquals(10, vend.checkMoney("10"));
 	}
+	
+	@Test
+	public void check_inventory_amount_returns_5() {
+		Assert.assertEquals(5, vend.getProduct(0).getInventory());
+	}
 
 }

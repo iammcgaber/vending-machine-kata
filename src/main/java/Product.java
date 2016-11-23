@@ -4,10 +4,12 @@ import java.util.Locale;
 public class Product {
 	private String name;
 	private int price;
+	private int inventory;
 	
 	public Product (String name, int price) {
 		this.name = name;
 		this.price = price;
+		this.inventory = 5;
 	}
 
 	public String getName() {
@@ -16,6 +18,14 @@ public class Product {
 
 	public int getPrice() {
 		return price;
+	}
+	
+	public int getInventory() {
+		return inventory;
+	}
+	
+	public void removeOneFromInventory() {
+		inventory--;
 	}
 
 	@Override

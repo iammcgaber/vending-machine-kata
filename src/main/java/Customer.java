@@ -44,11 +44,18 @@ public class Customer {
 				
 				if (vend.getProduct(userChoice).getPrice() > vend.getBalance()) {
 					System.out.println("Sorry, you do not have enough money.  Please enter more money.");
+					System.out.println("PRICE: " + vend.getProduct(userChoice).toString());
 					System.out.println();
 				}
 				else if(userChoice <= vend.getInventorySize()) {
+					if(vend.getProduct(userChoice).getInventory() > 0) {
 					Product purchasedProduct = vend.purchaseProduct(userChoice);
 					vend.displayPurchase(purchasedProduct);
+					vend.getChange();
+					}
+					else {
+						System.out.println(vend.getProduct(userChoice).getName() + " are SOLD OUT");
+					}
 				}
 				else {
 					System.out.println("Sorry, that is an invalid choice.");

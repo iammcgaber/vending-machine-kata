@@ -12,9 +12,15 @@ public class VendingMachine {
 	private String[] depositMenu = new String[]	{"Quarter", "Nickel", "Dime"};
 	public ArrayList<Product> products = new ArrayList<Product>();
 	public int balance = 0;
+	private int minBalance;
 	
 	public VendingMachine() {
 		populateVendingMachine();
+		for(Product cost : products) {
+			if(cost.getPrice() > minBalance) {
+				minBalance = cost.getPrice();
+			}
+		}
 	}
 	
 	public void showMainMenu() {
@@ -23,11 +29,14 @@ public class VendingMachine {
 		System.out.println(mainMenu[2]);
 		System.out.println();
 		System.out.println("Current balance: " + toString());
+		if(getBalance() < minBalance) {
+			System.out.println("INSERT COINS");
+		}
 	}
 	
 	public void listProducts() {
 		for(int i = 0; i < products.size(); i++) {
-			System.out.println((i + 1) + ") " + products.get(i).getName() + "     " + products.get(i).toString());
+			System.out.println((i + 1) + ") " + products.get(i).getName() + "     " + products.get(i).toString() + "     " + products.get(i).getInventory());
 		}
 		System.out.println();
 	}
@@ -52,6 +61,7 @@ public class VendingMachine {
 	
 	public Product purchaseProduct(int productNumber) {
 		balance -= products.get(productNumber - 1).getPrice();
+		products.get(productNumber - 1).removeOneFromInventory();
 		return products.get(productNumber - 1);
 	}
 	
@@ -88,6 +98,28 @@ public class VendingMachine {
 		else {
 			System.out.println("We don't accept those.");
 			return 0;
+		}
+	}
+	
+	public void getChange() {
+		System.out.println("Change:");
+		if(balance == 0) {
+			System.out.println("$0.00");
+		}
+		
+		if(balance > 25) {
+			System.out.println("Quarters: " + balance / 25);
+			balance = balance % 25;
+		}
+		
+		if(balance > 10) {
+			System.out.println("Dimes: " + balance / 10);
+			balance = balance % 10;
+		}
+		
+		if(balance > 5) {
+			System.out.println("Nickels: " + balance / 5);
+			balance = balance % 5;
 		}
 	}
 	
